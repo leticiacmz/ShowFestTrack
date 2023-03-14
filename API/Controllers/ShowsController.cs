@@ -12,6 +12,7 @@ public class ShowsController : Controller
     [HttpPost]
     public void AdicionarShow([FromBody] Show show)
     {
+
         shows.Add(show);
     }
 }
