@@ -24,6 +24,10 @@ public class ShowsController : Controller
         return shows;
     }
 
-    
+    [HttpGet("{artista}")]
+    public Show? RecuperaShowPorArtista(string artista)
+    {
+        return shows.FirstOrDefault(show => show.Artista== artista);
+    }
 }
 
