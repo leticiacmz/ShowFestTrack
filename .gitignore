@@ -1,0 +1,17 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/API/.vs
+/API/bin/
+/API/obj/
+/.vs
+*cache
+/API/obj/Debug/net6.0/ShowsAPI.assets.cache
+/API/obj/Debug/net6.0/ShowsAPI.csproj.AssemblyReference.cache
+/API/obj/Debug/net6.0/ShowsAPI.GeneratedMSBuildEditorConfig.editorconfig
+/API/obj/project.nuget.cache
+/API/obj/project.assets.json
+/API/obj/ShowsAPI.csproj.nuget.dgspec.json
+/API/obj/ShowsAPI.csproj.nuget.g.props
+/API/obj/ShowsAPI.csproj.nuget.g.targets
