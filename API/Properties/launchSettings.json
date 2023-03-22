@@ -16,7 +16,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "launchBrowser": false,
+      "launchBrowser": true,
       "launchUrl": "swagger"
     }
     

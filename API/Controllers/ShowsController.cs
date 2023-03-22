@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 using ShowsAPI.Models;
 
 namespace ShowsAPI.Controllers;
 [ApiController]
-[Route("[controller]")] 
-
+[Route("[controller]")]
 public class ShowsController : Controller
 {
     private static List<Show> shows = new List<Show>();
-    private static int id = 0; 
+    private static int id = 0;
 
     [HttpPost]
     public void AdicionarShow([FromBody] Show show)
@@ -25,9 +25,36 @@ public class ShowsController : Controller
     }
 
     [HttpGet("{artista}")]
-    public Show? RecuperaShowPorArtista(string artista)
+    public async Task<IActionResult> RecuperaShowPorArtista(string artista)
     {
-        return shows.FirstOrDefault(show => show.Artista== artista);
+        var show = await shows.AsQueryable().FirstOrDefaultAsync(show => show.Artista == artista);
+
+        if (show == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(new { Show = show });
+    }
+
+    [HttpPost("Artistas")]
+    public IActionResult AdicionarArtista([FromBody] string artista)
+    {
+        if (shows.Any(s => s.Artista == artista))
+        {
+            return Conflict(new { Message = "Já existe um artista cadastrado com este nome." });
+        }
+
+        shows.Add(new Show { Artista = artista });
+
+        return Ok(new { Message = "Artista adicionado com sucesso." });
+    }
+
+    [HttpGet("Artistas")]
+    public IActionResult ListarArtistas()
+    {
+        var artistas = shows.Select(s => s.Artista).Distinct();
+
+        return Ok(new { Artistas = artistas });
     }
 }
-
